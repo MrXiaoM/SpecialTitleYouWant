@@ -1,8 +1,15 @@
 # SpecialTitleYouWant
 
-[![](https://shields.io/github/downloads/MrXiaoM/SpecialTitleYouWant/total)](https://github.com/MrXiaoM//SpecialTitleYouWant) ![](https://img.shields.io/badge/mirai--console-2.11-blue)
+[![](https://shields.io/github/downloads/MrXiaoM/SpecialTitleYouWant/total)](https://github.com/MrXiaoM//SpecialTitleYouWant) ![](https://img.shields.io/badge/mirai--console-2.11-blue) [![](https://img.shields.io/badge/MiraiForum-post-yellow)](https://mirai.mamoe.net/topic/1270![])
 
 设置任何你想要的群头衔!
+
+## 特性
+
+* 可以自定义设置头衔的命令
+* 可以自定义大部分提示信息
+* 可以设置违禁词
+* 违禁词可用正则表达式
 
 ## 安装
 
