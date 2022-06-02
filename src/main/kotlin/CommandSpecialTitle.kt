@@ -1,23 +1,21 @@
 package top.mrxiaom
 
-import net.mamoe.mirai.console.command.BuiltInCommands
 import net.mamoe.mirai.contact.NormalMember
 import net.mamoe.mirai.contact.PermissionDeniedException
 import net.mamoe.mirai.contact.isOwner
-import net.mamoe.mirai.event.Event
 import net.mamoe.mirai.event.EventHandler
 import net.mamoe.mirai.event.SimpleListenerHost
-import net.mamoe.mirai.event.broadcast
 import net.mamoe.mirai.event.events.GroupMessageEvent
 import net.mamoe.mirai.message.data.*
 import java.util.regex.Pattern
+import java.util.regex.PatternSyntaxException
 
 /**
  * 为什么不用 Console 内建命令系统? 我拿不到 MessageSource
  */
 object CommandSpecialTitle : SimpleListenerHost() {
     @EventHandler
-    suspend fun onGroupMessage(event : GroupMessageEvent) {
+    suspend fun onGroupMessage(event: GroupMessageEvent) {
         if (!ConfigSpecialTitle.enableGroups.contains(event.group.id)) return
         val msg = event.message
         msg.dropWhile { it is MessageSource }
@@ -29,7 +27,7 @@ object CommandSpecialTitle : SimpleListenerHost() {
         while (s.startsWith(" ")) s = s.substring(1)
         val cmd = ConfigSpecialTitle.cmd
         for (c in cmd) {
-            if (s.startsWith(c)){
+            if (s.startsWith(c)) {
                 var tempTitle = s.substring(c.length)
                 // 只移除第一个空格（如果有）
                 //
@@ -40,7 +38,7 @@ object CommandSpecialTitle : SimpleListenerHost() {
         }
     }
 
-    private suspend fun handle(source : OnlineMessageSource.Incoming.FromGroup, title : String) {
+    private suspend fun handle(source: OnlineMessageSource.Incoming.FromGroup, title: String) {
         val oldTitle = source.sender.specialTitle
         // 群主检查
         if (!source.group.botAsMember.permission.isOwner()) {
@@ -49,7 +47,10 @@ object CommandSpecialTitle : SimpleListenerHost() {
         }
         val member = source.sender
         if (member !is NormalMember) {
-            sendMessage(source, ConfigSpecialTitle.msgNotNormalMember.replace("%old%", oldTitle).replace("%title%", title))
+            sendMessage(
+                source,
+                ConfigSpecialTitle.msgNotNormalMember.replace("%old%", oldTitle).replace("%title%", title)
+            )
             return
         }
         // 长度检查
@@ -72,13 +73,13 @@ object CommandSpecialTitle : SimpleListenerHost() {
         try {
             member.specialTitle = title
             sendMessage(source, ConfigSpecialTitle.msgSet.replace("%old%", oldTitle).replace("%title%", title))
-        } catch (e : PermissionDeniedException) {
+        } catch (e: PermissionDeniedException) {
             sendMessage(source, ConfigSpecialTitle.msgNotOwner.replace("%old%", oldTitle).replace("%title%", title))
             return
         }
     }
 
-    private suspend fun sendMessage(source : OnlineMessageSource.Incoming.FromGroup, s : String) {
+    private suspend fun sendMessage(source: OnlineMessageSource.Incoming.FromGroup, s: String) {
         var str = s
         val msg = MessageChainBuilder()
         if (str.contains("%quote%")) {
@@ -88,7 +89,7 @@ object CommandSpecialTitle : SimpleListenerHost() {
         if (!str.contains("%at%")) msg.add(str)
         else {
             val split = str.split("%at%")
-            for ((i, a) in split.withIndex()){
+            for ((i, a) in split.withIndex()) {
                 msg.add(a)
                 if (i < split.size - 1) msg.add(At(source.sender.id))
             }
@@ -100,8 +101,8 @@ object CommandSpecialTitle : SimpleListenerHost() {
      * 检查是否含有违禁词
      * @return true包含违禁词，false不含违禁词
      */
-    suspend fun checkIllegalWords(str: String) : Boolean {
-        for (s in ConfigSpecialTitle.illegalWords){
+    fun checkIllegalWords(str: String): Boolean {
+        for (s in ConfigSpecialTitle.illegalWords) {
             if (str.contains(s, true)) return true
         }
         return false
@@ -111,9 +112,13 @@ object CommandSpecialTitle : SimpleListenerHost() {
      * 正则匹配是否含有违禁词
      * @return true包含违禁词，false不含违禁词
      */
-    suspend fun checkIllegalPatterns(str: String) : Boolean {
-        for (s in ConfigSpecialTitle.illegalPatterns){
-            if (Pattern.matches(s, str)) return true
+    fun checkIllegalPatterns(str: String): Boolean {
+        for (s in ConfigSpecialTitle.illegalPatterns) {
+            try {
+                if (Pattern.matches(s, str)) return true
+            } catch (e: PatternSyntaxException) {
+                SpecialTitleYouWant.logger.warning("正则表达式错误 $s", e)
+            }
         }
         return false
     }

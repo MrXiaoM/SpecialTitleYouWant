@@ -19,7 +19,7 @@ object SpecialTitleYouWant : KotlinPlugin(
         reloadConfig()
         GlobalEventChannel.registerListenerHost(CommandSpecialTitle)
         CommandManager.registerCommand(CommandReload)
-        logger.info { "Plugin loaded "+configFolder.absolutePath }
+        logger.info { "Plugin loaded" }
 
     }
 

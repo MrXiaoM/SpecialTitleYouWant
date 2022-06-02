@@ -8,9 +8,9 @@
 
 到 [Releases](https://github.com/MrXiaoM//SpecialTitleYouWant) 下载插件并放入 plugins 文件夹进行安装
 
-> 2.11 或以上下载 SpecialTitleYouWant-x.x.x.jar
+> 2.11 或以上下载 SpecialTitleYouWant-*-.mirai2.jar
 > 
-> 2.11 以下下载 SpecialTitleYouWant-x.x.x-legacy.jar
+> 2.11 以下下载 SpecialTitleYouWant-legacy-*.mirai.jar
 
 安装完毕后，编辑配置文件 (`config/top.mrxiaom.SpecialTitleYouWant/config.yml`)
 
@@ -23,6 +23,10 @@ enableGroup:
 ```
 
 在控制台执行 `/stuw reload` 重载配置文件即可
+
+> ***为什么不用 console 的內建权限系统?***  
+> 高情商: 据我了解大多数小白都不了解什么是“被许可人”之类对他们来说有点复杂的东西，那我不如返璞归真，使用配置文件储存需要启用的群。  
+> 低情商: 反正需求不高，懒得学权限系统怎么用。
 
 ## 用法
 
@@ -39,3 +43,5 @@ enableGroup:
 ```shell
 /gradlew buildPlugin buildPluginLegacy
 ```
+
+> 这是我第一次用kotlin写的一个完整程序，代码很💩，新人不要参考（
