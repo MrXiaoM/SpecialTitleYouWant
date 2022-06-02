@@ -17,12 +17,15 @@ object CommandSpecialTitle : SimpleListenerHost() {
     @EventHandler
     suspend fun onGroupMessage(event: GroupMessageEvent) {
         if (!ConfigSpecialTitle.enableGroups.contains(event.group.id)) return
+
         val msg = event.message
-        msg.dropWhile { it is MessageSource }
-        val at = msg[0]
-        if (at !is At || at.target != event.bot.id) return
-        msg.drop(0)
-        var s = msg.contentToString()
+        var a = false
+        var s = ""
+        for (single in msg) {
+            if(a)s+=single.contentToString()
+            else if (single is At && single.target==event.bot.id)a=true
+        }
+        if(!a) return
         // 硬核移除多余空格
         while (s.startsWith(" ")) s = s.substring(1)
         val cmd = ConfigSpecialTitle.cmd
