@@ -1,6 +1,6 @@
 # SpecialTitleYouWant
 
-[![](https://shields.io/github/downloads/MrXiaoM/SpecialTitleYouWant/total)](https://github.com/MrXiaoM//SpecialTitleYouWant) ![](https://img.shields.io/badge/mirai--console-2.11-blue) [![](https://img.shields.io/badge/MiraiForum-post-yellow)](https://mirai.mamoe.net/topic/1270![])
+[![](https://shields.io/github/downloads/MrXiaoM/SpecialTitleYouWant/total)](https://github.com/MrXiaoM/SpecialTitleYouWant/releases) [![](https://img.shields.io/badge/mirai--console-2.11-blue)](https://github.com/mamoe/mirai) [![](https://img.shields.io/badge/MiraiForum-post-yellow)](https://mirai.mamoe.net/topic/1270![])
 
 设置任何你想要的群头衔!
 
@@ -15,11 +15,11 @@
 
 到 [Releases](https://github.com/MrXiaoM//SpecialTitleYouWant) 下载插件并放入 plugins 文件夹进行安装
 
-> 2.11 或以上下载 SpecialTitleYouWant-*-.mirai2.jar
+> 2.11 或以上下载 SpecialTitleYouWant-*.mirai2.jar
 > 
 > 2.11 以下下载 SpecialTitleYouWant-legacy-*.mirai.jar
 
-安装完毕后，编辑配置文件 (`config/top.mrxiaom.SpecialTitleYouWant/config.yml`)
+安装完毕后，编辑配置文件 (路径: `config/top.mrxiaom.SpecialTitleYouWant/config.yml`，在旧版mirai的路径是`config/自定义头衔/config.yml`)
 
 在 enableGroup 中加入要使用该插件的群号，如
 
