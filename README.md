@@ -21,10 +21,10 @@
 
 安装完毕后，编辑配置文件 (路径: `config/top.mrxiaom.SpecialTitleYouWant/config.yml`，在旧版mirai的路径是`config/自定义头衔/config.yml`)
 
-在 enableGroup 中加入要使用该插件的群号，如
+在 enableGroups 中加入要使用该插件的群号，如
 
 ```yaml
-enableGroup:
+enableGroups:
   - 114514
   - 1919810
 ```
