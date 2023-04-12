@@ -52,3 +52,7 @@ enableGroups:
 ```
 
 > 这是我第一次用kotlin写的一个完整程序，代码很💩，新人不要参考（
+
+## 捐助
+
+前往 [爱发电](https://afdian.net/a/mrxiaom) 捐助我。
